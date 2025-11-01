@@ -1,0 +1,16 @@
+{
+  "name": "caballeros-ms",
+  "version": "1.0.0",
+  "main": "ConsultaCaballerosZ.js",
+  "scripts": {
+    "start:consulta": "node ConsultaCaballerosZ.js",
+    "start:insercion": "node InsercionCaballerosZ.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.15.3"
+  },
+  "engines": {
+    "node": ">=18 <23"
+  },
+  "license": "ISC"
+}
