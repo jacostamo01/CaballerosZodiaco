@@ -3,14 +3,13 @@ const http = require('http');
 const { URL } = require('url');
 const mysql = require('mysql2/promise');
 
-/* ====== CONFIG DB (ajusta si es necesario) ====== */
-const DB_HOST = process.env.DB_HOST || '127.0.0.1';
-const DB_PORT = Number(process.env.DB_PORT || 3306);
-const DB_USER = process.env.DB_USER || 'root';
-const DB_PASS = process.env.DB_PASS || 'root';
-const DB_NAME = process.env.DB_NAME || 'caballeros_zodiaco';
+const DB_HOST = process.env.DB_HOST || tramway.proxy.rlwy.net;         // ej: containers-us-west-xxx.railway.app
+const DB_PORT = Number(process.env.DB_PORT || 44218); // 3306 (o el que te dé Railway)
+const DB_USER = process.env.DB_USER || root;         // usuario Railway
+const DB_PASS = process.env.DB_PASS || fIssUDcOHlhBFWdAZRiapLUZILysMxMI;         // password Railway
+const DB_NAME = process.env.DB_NAME  || railway;         // p.ej. caballeros_zodiaco
+const DB_SSL  = (process.env.DB_SSL || 'false').toLowerCase() === 'true';
 
-/* ====== POOL ====== */
 const pool = mysql.createPool({
   host: DB_HOST,
   port: DB_PORT,
@@ -18,7 +17,8 @@ const pool = mysql.createPool({
   password: DB_PASS,
   database: DB_NAME,
   waitForConnections: true,
-  connectionLimit: 10
+  connectionLimit: 10,
+  ssl: DB_SSL ? { rejectUnauthorized: true } : undefined
 });
 
 /* ====== HELPERS ====== */
