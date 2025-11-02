@@ -21,6 +21,10 @@ const pool = mysql.createPool({
   ssl: DB_SSL ? { rejectUnauthorized: true } : undefined
 });
 
+pool.on('connection', (conn) => {
+  conn.query("SET time_zone = '-05:00'");  // America/Bogota (sin DST)
+});
+
 function send(res, code, data) {
   res.writeHead(code, {
     'Content-Type': 'application/json; charset=utf-8',
